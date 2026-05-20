@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experience a Live Demo | AI For Businesses</title>
+  <meta name="description" content="Experience a live payroll earnings automation demo by AI For Businesses." />
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-deep: #030814;
+      --surface-1: rgba(11, 21, 39, 0.9);
+      --surface-2: rgba(7, 15, 30, 0.82);
+      --surface-3: rgba(6, 12, 24, 0.72);
+      --panel-border: rgba(129, 194, 255, 0.18);
+      --panel-border-strong: rgba(139, 202, 255, 0.28);
+      --text: #f3f8ff;
+      --muted: #b7c6de;
+      --soft: #8fa6c6;
+      --accent: #82d8ff;
+      --accent-2: #4ea3ff;
+      --accent-3: #2c62ff;
+      --accent-soft: rgba(130, 216, 255, 0.18);
+      --shadow-lg: 0 28px 70px rgba(1, 8, 21, 0.52);
+      --shadow-md: 0 18px 44px rgba(1, 8, 21, 0.36);
+      --radius-xl: 34px;
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 16px;
+      --success: #9ff2d1;
+      --danger: #ffb1b7;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 14%, rgba(130, 216, 255, 0.14), transparent 20%),
+        radial-gradient(circle at 84% 12%, rgba(44, 98, 255, 0.16), transparent 22%),
+        radial-gradient(circle at 50% 120%, rgba(78, 163, 255, 0.10), transparent 38%),
+        linear-gradient(180deg, #030815 0%, #071120 54%, #050c19 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.34), transparent 92%);
+      opacity: 0.16;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(calc(100% - 28px), 1240px);
+      margin: 16px auto 44px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      padding: 96px 56px 88px;
+      background:
+        radial-gradient(circle at 78% 20%, rgba(130, 216, 255, 0.22), transparent 16%),
+        radial-gradient(circle at 92% 8%, rgba(44, 98, 255, 0.22), transparent 20%),
+        linear-gradient(135deg, rgba(7, 15, 30, 0.98) 0%, rgba(8, 20, 42, 0.96) 54%, rgba(11, 28, 63, 0.94) 100%);
+      border: 1px solid var(--panel-border-strong);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.06);
+      isolation: isolate;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border-radius: 999px;
+      filter: blur(2px);
+      opacity: 0.9;
+      z-index: -1;
+    }
+
+    .hero::before {
+      width: 380px;
+      height: 380px;
+      right: -120px;
+      top: -90px;
+      background: radial-gradient(circle, rgba(130, 216, 255, 0.16) 0%, rgba(130, 216, 255, 0.05) 42%, transparent 72%);
+    }
+
+    .hero::after {
+      width: 420px;
+      height: 420px;
+      right: 8%;
+      bottom: -240px;
+      background: radial-gradient(circle, rgba(44, 98, 255, 0.20) 0%, rgba(44, 98, 255, 0.06) 46%, transparent 74%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(149, 208, 255, 0.24);
+      background: linear-gradient(180deg, rgba(132, 216, 255, 0.10), rgba(78, 163, 255, 0.06));
+      color: #bfefff;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 840px;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      text-wrap: balance;
+    }
+
+    .lead {
+      margin: 22px 0 0;
+      max-width: 780px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 0 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #061423;
+      background: linear-gradient(135deg, #b6f1ff 0%, #83d9ff 36%, #5fb4ff 72%, #8fdcff 100%);
+      border-color: rgba(196, 239, 255, 0.52);
+      box-shadow:
+        0 14px 30px rgba(35, 110, 255, 0.24),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow:
+        0 18px 36px rgba(35, 110, 255, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border-color: rgba(143, 198, 255, 0.22);
+      background: linear-gradient(180deg, rgba(15, 28, 50, 0.9), rgba(8, 17, 34, 0.88));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(143, 198, 255, 0.34);
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .section {
+      padding: 74px 18px 0;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      font-size: clamp(2.1rem, 4vw, 3.15rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    .section > p {
+      margin: 0;
+      max-width: 880px;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1.05rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .card,
+    .form-panel,
+    .result-panel {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(14, 28, 49, 0.92) 0%, rgba(8, 17, 34, 0.88) 100%);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    .card::before,
+    .form-panel::before,
+    .result-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(171, 224, 255, 0.32), transparent);
+      pointer-events: none;
+    }
+
+    .card::after,
+    .form-panel::after,
+    .result-panel::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 150px;
+      height: 150px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(130, 216, 255, 0.10), transparent 70%);
+      pointer-events: none;
+    }
+
+    .card h3,
+    .form-panel h3,
+    .result-panel h3 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .card p,
+    .form-panel p,
+    .result-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.68;
+    }
+
+    .demo-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 24px;
+      margin-top: 30px;
+      align-items: start;
+    }
+
+    .note {
+      margin: 18px 0 0;
+      padding: 15px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(146, 199, 255, 0.18);
+      background: linear-gradient(180deg, rgba(10, 21, 41, 0.82), rgba(7, 14, 28, 0.8));
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 0.98rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    form {
+      margin-top: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 0.96rem;
+      letter-spacing: -0.01em;
+    }
+
+    input {
+      width: 100%;
+      min-height: 54px;
+      border-radius: 16px;
+      border: 1px solid rgba(143, 198, 255, 0.16);
+      background: linear-gradient(180deg, rgba(4, 11, 22, 0.92), rgba(7, 14, 28, 0.85));
+      color: var(--text);
+      padding: 0 16px;
+      font-size: 1rem;
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.025);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    input::placeholder { color: #7f96b8; }
+
+    input:focus {
+      border-color: rgba(130, 216, 255, 0.58);
+      box-shadow:
+        0 0 0 4px rgba(130, 216, 255, 0.10),
+        inset 0 1px 0 rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(5, 12, 24, 0.96), rgba(8, 16, 31, 0.9));
+    }
+
+    .result-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 13px 15px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(7, 14, 28, 0.88), rgba(10, 19, 37, 0.84));
+      border: 1px solid rgba(143, 198, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.025);
+    }
+
+    .result-row span:first-child { color: var(--muted); }
+
+    .result-row strong {
+      color: #d8f2ff;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .status {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      line-height: 1.58;
+      display: none;
+    }
+
+    .status.success {
+      display: block;
+      color: var(--success);
+      border: 1px solid rgba(159, 242, 209, 0.24);
+      background: linear-gradient(180deg, rgba(15, 58, 46, 0.42), rgba(13, 46, 37, 0.32));
+    }
+
+    .status.error {
+      display: block;
+      color: var(--danger);
+      border: 1px solid rgba(255, 177, 183, 0.22);
+      background: linear-gradient(180deg, rgba(76, 24, 34, 0.42), rgba(57, 18, 27, 0.34));
+    }
+
+    .footer {
+      color: var(--soft);
+      text-align: center;
+      padding: 38px 20px 10px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .demo-layout { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .page { width: 100%; margin: 0 0 28px; }
+      .hero {
+        border-radius: 0 0 30px 30px;
+        padding: 68px 24px 62px;
+      }
+      .section { padding-top: 58px; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .field-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero" aria-label="Experience a Live Demo">
+      <div class="eyebrow">Live Automation Demo</div>
+      <h1>Experience a Live Demo</h1>
+      <p class="lead">This working example shows how structured payroll input can move through a complete automation workflow — calculation, report generation, and delivery.</p>
+      <p class="lead">Complete the form below to test a simple payroll earnings automation system built to demonstrate real intake-to-output logic.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#demo-form">Start the Demo</a>
+        <a class="btn btn-secondary" href="index.html">Back to AI For Businesses</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What This Demo Shows</h2>
+      <p>This payroll demo illustrates how business information can be submitted through a guided intake flow, processed automatically using rules-based logic, transformed into a formatted report, and delivered by email.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Structured Intake</h3>
+          <p>The system collects clean, defined information instead of relying on inconsistent email chains or manual back-and-forth.</p>
+        </article>
+        <article class="card">
+          <h3>Calculated Output</h3>
+          <p>The workflow applies real payroll logic by calculating regular pay, overtime rate, overtime pay, and total gross pay.</p>
+        </article>
+        <article class="card">
+          <h3>Automatic Delivery</h3>
+          <p>The generated report is emailed directly to the person testing the system, while an internal notification is sent to AI For Businesses.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="demo-form" class="section">
+      <h2>Payroll Earnings Automation Demo</h2>
+      <p>Enter regular hours and overtime hours separately. If no overtime was worked, enter 0 in the overtime field.</p>
+
+      <div class="demo-layout">
+        <div class="form-panel">
+          <h3>Demo Intake Form</h3>
+          <p>This form demonstrates a simple business workflow where user input is captured, calculated, formatted, and delivered automatically.</p>
+          <div class="note">Expected report output: Pay Rate, Regular Hours, Overtime Hours, Regular Pay, Overtime Rate, Overtime Pay, and Total Gross Pay.</div>
+
+          <form id="payrollDemoForm">
+            <div class="field-grid">
+              <div class="field">
+                <label for="full_name">Full Name</label>
+                <input id="full_name" name="full_name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required />
+              </div>
+              <div class="field full">
+                <label for="phone">Phone Number (Optional)</label>
+                <input id="phone" name="phone" type="tel" placeholder="Optional" />
+              </div>
+              <div class="field full">
+                <label for="employee_name">Employee Name</label>
+                <input id="employee_name" name="employee_name" type="text" placeholder="Employee name" required />
+              </div>
+              <div class="field">
+                <label for="pay_rate">Pay Rate</label>
+                <input id="pay_rate" name="pay_rate" type="number" step="0.01" min="0" placeholder="20.00" required />
+              </div>
+              <div class="field">
+                <label for="regular_hours">Regular Hours</label>
+                <input id="regular_hours" name="regular_hours" type="number" step="0.01" min="0" placeholder="40" required />
+              </div>
+              <div class="field full">
+                <label for="overtime_hours">Overtime Hours</label>
+                <input id="overtime_hours" name="overtime_hours" type="number" step="0.01" min="0" placeholder="0" required />
+              </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" id="submitBtn">Generate My Payroll Report</button>
+            <div id="statusMessage" class="status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <aside class="result-panel">
+          <h3>Live Calculation Preview</h3>
+          <p>The values below update as the form is completed so the logic is visible before submission.</p>
+
+          <div class="result-list">
+            <div class="result-row"><span>Pay Rate</span><strong id="previewPayRate">$0.00</strong></div>
+            <div class="result-row"><span>Regular Hours</span><strong id="previewRegularHours">0</strong></div>
+            <div class="result-row"><span>Overtime Hours</span><strong id="previewOvertimeHours">0</strong></div>
+            <div class="result-row"><span>Regular Pay</span><strong id="previewRegularPay">$0.00</strong></div>
+            <div class="result-row"><span>Overtime Rate</span><strong id="previewOvertimeRate">$0.00</strong></div>
+            <div class="result-row"><span>Overtime Pay</span><strong id="previewOvertimePay">$0.00</strong></div>
+            <div class="result-row"><span>Total Gross Pay</span><strong id="previewTotalGrossPay">$0.00</strong></div>
+          </div>
+
+          <div class="note">When the form is submitted, the system should generate the report, email it to the provided address, and send an internal notification to AI For Businesses.</div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="footer">© 2026 AI For Businesses. Powered by Apropos AI Systems &amp; Automation.</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('payrollDemoForm');
+    const statusMessage = document.getElementById('statusMessage');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const formatCurrency = (value) => {
+      const num = Number(value);
+      return Number.isFinite(num) ? `$${num.toFixed(2)}` : '$0.00';
+    };
+
+    const formatHours = (value) => {
+      const num = Number(value);
+      if (!Number.isFinite(num)) return '0';
+      return Number.isInteger(num) ? String(num) : num.toFixed(2);
+    };
+
+    const recalcPreview = () => {
+      const payRate = Number(document.getElementById('pay_rate').value || 0);
+      const regularHours = Number(document.getElementById('regular_hours').value || 0);
+      const overtimeHours = Number(document.getElementById('overtime_hours').value || 0);
+
+      const overtimeRate = payRate * 1.5;
+      const regularPay = payRate * regularHours;
+      const overtimePay = overtimeRate * overtimeHours;
+      const totalGrossPay = regularPay + overtimePay;
+
+      document.getElementById('previewPayRate').textContent = formatCurrency(payRate);
+      document.getElementById('previewRegularHours').textContent = formatHours(regularHours);
+      document.getElementById('previewOvertimeHours').textContent = formatHours(overtimeHours);
+      document.getElementById('previewRegularPay').textContent = formatCurrency(regularPay);
+      document.getElementById('previewOvertimeRate').textContent = formatCurrency(overtimeRate);
+      document.getElementById('previewOvertimePay').textContent = formatCurrency(overtimePay);
+      document.getElementById('previewTotalGrossPay').textContent = formatCurrency(totalGrossPay);
+    };
+
+    ['pay_rate', 'regular_hours', 'overtime_hours'].forEach((id) => {
+      document.getElementById(id).addEventListener('input', recalcPreview);
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      statusMessage.className = 'status';
+      statusMessage.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Generating Report...';
+
+      const payload = {
+        full_name: document.getElementById('full_name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        employee_name: document.getElementById('employee_name').value.trim(),
+        pay_rate: document.getElementById('pay_rate').value,
+        regular_hours: document.getElementById('regular_hours').value,
+        overtime_hours: document.getElementById('overtime_hours').value,
+        language: 'en'
+      };
+
+      try {
+        const response = await fetch('/.netlify/functions/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.details || data.error || 'Unable to process the payroll demo submission.');
+        }
+
+        statusMessage.className = 'status success';
+        statusMessage.textContent = 'Success. Your payroll earnings report has been generated and sent to your email. This demonstrates how structured intake can move through a complete automation workflow.';
+        form.reset();
+        recalcPreview();
+      } catch (error) {
+        statusMessage.className = 'status error';
+        statusMessage.textContent = error.message || 'Something went wrong while processing the demo.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Generate My Payroll Report';
+      }
+    });
+
+    recalcPreview();
+  </script>
+</body>
+</html>
