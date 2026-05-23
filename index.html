@@ -1,617 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlowDesk Pro — Business Intake Engine</title>
-<meta name="description" content="From payroll calculation to client onboarding — our intake engine captures every detail and delivers instant results automatically.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg:      #030816;
-  --bg2:     #061225;
-  --accent:  #4F6EF7;
-  --accent2: #7C3AED;
-  --teal:    #06B6D4;
-  --text:    #F5F8FF;
-  --muted:   #7A90B8;
-  --muted2:  #4A5D7A;
-  --border:  rgba(79,110,247,0.15);
-  --border2: rgba(6,182,212,0.2);
-  --glass:   rgba(6,18,37,0.7);
-  --display: 'Syne', sans-serif;
-  --body:    'Inter', sans-serif;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: 15px;
-  line-height: 1.65;
-  overflow-x: hidden;
-  min-height: 100vh;
-}
-
-a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
-
-/* ── ANIMATED BACKGROUND ── */
-.bg-canvas {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-}
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  animation: orb-drift 18s ease-in-out infinite alternate;
-}
-.orb-1 {
-  width: 600px; height: 600px;
-  top: -100px; left: 50%;
-  background: radial-gradient(ellipse, rgba(6,182,212,0.12) 0%, transparent 70%);
-  animation-duration: 20s;
-}
-.orb-2 {
-  width: 500px; height: 600px;
-  top: 25%; left: -150px;
-  background: radial-gradient(ellipse, rgba(79,110,247,0.14) 0%, transparent 70%);
-  animation-delay: -7s; animation-duration: 23s;
-}
-.orb-3 {
-  width: 500px; height: 400px;
-  bottom: 0; right: -80px;
-  background: radial-gradient(ellipse, rgba(124,58,237,0.1) 0%, transparent 70%);
-  animation-delay: -13s; animation-duration: 21s;
-}
-@keyframes orb-drift {
-  0%   { transform: translate(0,0) scale(1); }
-  100% { transform: translate(25px, -35px) scale(1.08); }
-}
-
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(79,110,247,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,110,247,0.04) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.05) 80%, transparent);
-}
-
-
-/* ── HERO ── */
-.hero {
-  position: relative; z-index: 1;
-  min-height: 100vh;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: clamp(3rem,6vw,5rem) clamp(1rem,4vw,2.5rem) clamp(2rem,4vw,3rem);
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-
-.hero-brand {
-  position: relative;
-  width: min(500px, 90vw);
-  margin: 0 auto 2rem;
-  animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
-}
-.arc-svg { width: 100%; max-width: 500px; display: block; margin: 0 auto; }
-.arc-text {
-  font-family: 'Syne', sans-serif;
-  font-size: 14px; font-weight: 800;
-  fill: var(--teal);
-  letter-spacing: 0.18em; text-transform: uppercase;
-}
-.logo-frame {
-  width: min(420px, 88vw);
-  aspect-ratio: 16/9;
-  margin: -44px auto 0;
-  background: linear-gradient(145deg, rgba(6,182,212,0.1), rgba(79,110,247,0.06));
-  border: 1px solid rgba(6,182,212,0.2);
-  border-radius: 20px;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-  box-shadow: 0 0 60px rgba(6,182,212,0.12), inset 0 0 40px rgba(6,182,212,0.04);
-}
-.logo-frame::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(6,182,212,0.08), transparent 70%);
-}
-.logo-frame::after {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(6,182,212,0.6), transparent);
-}
-.logo-frame img {
-  width: 75%; position: relative; z-index: 1;
-  filter: drop-shadow(0 0 20px rgba(6,182,212,0.4));
-}
-
-.hero-headline {
-  font-family: var(--display);
-  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  color: var(--text);
-  margin-bottom: 1rem;
-  animation: fadeUp 0.9s 0.12s cubic-bezier(0.22,1,0.36,1) both;
-}
-.hero-headline span {
-  background: linear-gradient(135deg, var(--teal), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-sub {
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-  color: var(--muted);
-  max-width: 560px; margin: 0 auto 2rem;
-  line-height: 1.75;
-  animation: fadeUp 0.9s 0.22s cubic-bezier(0.22,1,0.36,1) both;
-}
-
-.hero-cta-wrap {
-  display: flex; flex-direction: column; align-items: center; gap: 1rem;
-  animation: fadeUp 0.9s 0.32s cubic-bezier(0.22,1,0.36,1) both;
-}
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  font-family: var(--display);
-  font-size: 0.95rem; font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg, var(--teal) 0%, var(--accent) 100%);
-  border-radius: 14px;
-  padding: 1rem 2.2rem;
-  box-shadow: 0 0 40px rgba(6,182,212,0.28), inset 0 1px 0 rgba(255,255,255,0.1);
-  transition: transform 0.15s, box-shadow 0.15s;
-  white-space: nowrap;
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(6,182,212,0.42); }
-.btn-primary .arrow { transition: transform 0.2s; }
-.btn-primary:hover .arrow { transform: translateX(4px); }
-
-.trust-row {
-  display: flex; align-items: center; justify-content: center;
-  gap: 2rem; flex-wrap: wrap;
-  margin-top: 2.5rem; padding-top: 2rem;
-  border-top: 1px solid var(--border);
-  width: 100%; max-width: 680px; margin-left: auto; margin-right: auto;
-  animation: fadeUp 0.9s 0.42s cubic-bezier(0.22,1,0.36,1) both;
-}
-.trust-item {
-  display: flex; align-items: center; gap: 0.6rem;
-  font-family: var(--display);
-  font-size: 0.7rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--muted2);
-}
-
-/* ── SECTIONS ── */
-.section {
-  position: relative; z-index: 1;
-  padding: clamp(3.5rem,7vw,6rem) clamp(1rem,4vw,2.5rem);
-  border-bottom: 1px solid var(--border);
-}
-.section-inner { max-width: 1080px; margin: 0 auto; }
-.section-eyebrow {
-  font-family: var(--display);
-  font-size: 0.65rem; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 0.75rem;
-}
-.section-title {
-  font-family: var(--display);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 800;
-  color: var(--text);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-}
-.section-sub {
-  font-size: 0.95rem; color: var(--muted);
-  line-height: 1.75; max-width: 580px;
-}
-.section-header { margin-bottom: 3.5rem; }
-
-/* ── FEATURE CARDS ── */
-.feature-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
-}
-.feature-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 2rem 1.75rem;
-  backdrop-filter: blur(12px);
-  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-  position: relative; overflow: hidden;
-}
-.feature-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(6,182,212,0.5), transparent);
-  opacity: 0; transition: opacity 0.25s;
-}
-.feature-card:hover {
-  border-color: rgba(6,182,212,0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(6,182,212,0.08);
-}
-.feature-card:hover::before { opacity: 1; }
-.feature-icon {
-  width: 52px; height: 52px;
-  background: rgba(6,182,212,0.08);
-  border: 1px solid rgba(6,182,212,0.18);
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 1.4rem;
-  transition: background 0.25s, border-color 0.25s;
-}
-.feature-card:hover .feature-icon {
-  background: rgba(6,182,212,0.15);
-  border-color: rgba(6,182,212,0.35);
-}
-.feature-card h3 {
-  font-family: var(--display);
-  font-size: 1.1rem; font-weight: 700;
-  color: var(--text); margin-bottom: 0.75rem;
-  letter-spacing: -0.01em;
-}
-.feature-card p {
-  font-size: 0.87rem; color: var(--muted); line-height: 1.7;
-}
-
-/* ── DEMO FLOW ── */
-.flow-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 20px; overflow: hidden;
-}
-.flow-step {
-  background: var(--bg2);
-  padding: 2rem 1.5rem;
-  position: relative;
-  transition: background 0.2s;
-}
-.flow-step:hover { background: rgba(6,18,37,0.95); }
-.flow-num {
-  font-family: var(--display);
-  font-size: 3rem; font-weight: 800;
-  color: rgba(6,182,212,0.08);
-  line-height: 1; margin-bottom: 1rem;
-  letter-spacing: -0.04em;
-}
-.flow-step h4 {
-  font-family: var(--display);
-  font-size: 0.85rem; font-weight: 700;
-  color: var(--text); margin-bottom: 0.5rem;
-}
-.flow-step p {
-  font-size: 0.8rem; color: var(--muted2); line-height: 1.65;
-}
-.flow-tag {
-  display: inline-block; margin-top: 1rem;
-  font-family: var(--display);
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--teal);
-  background: rgba(6,182,212,0.08);
-  border: 1px solid rgba(6,182,212,0.2);
-  border-radius: 999px;
-  padding: 0.25rem 0.75rem;
-}
-
-/* ── CROSS-DEMO ── */
-.cross-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
-}
-.cross-card {
-  display: flex; flex-direction: column;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 18px; padding: 1.75rem;
-  backdrop-filter: blur(12px);
-  transition: border-color 0.25s, transform 0.2s;
-}
-.cross-card:hover {
-  border-color: rgba(79,110,247,0.4);
-  transform: translateY(-3px);
-}
-.cross-card-label {
-  font-family: var(--display);
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 0.5rem;
-}
-.cross-card h3 {
-  font-family: var(--display);
-  font-size: 1rem; font-weight: 700;
-  color: var(--text); margin-bottom: 0.5rem;
-}
-.cross-card p {
-  font-size: 0.82rem; color: var(--muted); line-height: 1.6; flex: 1;
-}
-.cross-link {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  margin-top: 1.25rem;
-  font-family: var(--display);
-  font-size: 0.75rem; font-weight: 700;
-  color: var(--teal);
-  transition: gap 0.2s;
-}
-.cross-card:hover .cross-link { gap: 0.65rem; }
-
-/* ── FOOTER ── */
-footer {
-  position: relative; z-index: 1;
-  padding: 2.5rem clamp(1rem,4vw,2.5rem);
-  border-top: 1px solid var(--border);
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem;
-}
-.footer-logo { display: flex; align-items: center; gap: 0.75rem; }
-.footer-logo img { height: 28px; filter: drop-shadow(0 0 8px rgba(6,182,212,0.35)); }
-.footer-meta {
-  font-family: var(--display);
-  font-size: 0.62rem; font-weight: 600;
-  letter-spacing: 0.08em; color: var(--muted2);
-}
-.footer-links { display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; }
-.footer-links a { font-size: 0.8rem; color: var(--muted2); transition: color 0.15s; }
-.footer-links a:hover { color: var(--text); }
-.footer-back {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  font-family: var(--display);
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--teal); transition: gap 0.2s;
-}
-.footer-back:hover { gap: 0.6rem; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 960px) {
-  .feature-grid { grid-template-columns: 1fr 1fr; }
-  .flow-grid { grid-template-columns: 1fr 1fr; }
-  .cross-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 600px) {
-  .feature-grid, .cross-grid { grid-template-columns: 1fr; }
-  .flow-grid { grid-template-columns: 1fr; }
-  .trust-row { gap: 1.25rem; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlowDesk Pro — Cloud Customer-Response Systems</title>
+  <meta name="description" content="FlowDesk Pro is a cloud-delivered customer-response system for call capture, customer intake, lead management, missed-call workflows, and appointment-ready follow-up." />
+  <meta property="og:title" content="FlowDesk Pro — Cloud Customer-Response Systems" />
+  <meta property="og:description" content="Answer calls, capture requests, create dashboard records, and manage follow-up through secure web-based access." />
+  <meta property="og:image" content="https://aiflowdeskpro.com/AI4-FLOWDESK-PRO-LOGO.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#040a16; --bg2:#071224; --ink:#f1f7ff; --text:#bed0e4; --muted:#7891aa; --soft:#516a83;
+      --panel:rgba(8,18,38,.82); --panel2:rgba(12,25,52,.92); --line:rgba(92,197,240,.16); --line2:rgba(92,197,240,.34);
+      --blue:#2d9cdb; --cyan:#5cc5f0; --purple:#7c3aed; --violet:#9d6ef8; --green:#34d399; --amber:#f59e0b;
+      --display:'DM Serif Display',serif; --sans:'DM Sans',sans-serif; --mono:'JetBrains Mono',monospace; --radius:20px; --radius-lg:30px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth} body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;line-height:1.65}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:
+      radial-gradient(ellipse 70% 45% at 50% -10%,rgba(45,156,219,.22),transparent 62%),
+      radial-gradient(ellipse 48% 35% at 88% 18%,rgba(124,58,237,.16),transparent 58%),
+      radial-gradient(ellipse 42% 35% at 10% 75%,rgba(52,211,153,.08),transparent 55%),
+      linear-gradient(rgba(92,197,240,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(92,197,240,.028) 1px,transparent 1px);background-size:auto,auto,auto,72px 72px,72px 72px}
+    a{color:inherit;text-decoration:none} img{display:block;max-width:100%}.page{position:relative;z-index:1}
+    .hero{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.82fr);gap:clamp(2rem,6vw,5rem);align-items:center;padding:clamp(3rem,8vw,6.5rem) clamp(1rem,5vw,5rem);border-bottom:1px solid var(--line)}
+    .eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.68rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--green);background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.24);padding:.45rem .85rem;border-radius:999px;margin-bottom:1.35rem}.eyebrow::before{content:'';width:7px;height:7px;border-radius:999px;background:var(--green);box-shadow:0 0 14px var(--green)}
+    h1{font-family:var(--display);font-size:clamp(3rem,7vw,6.7rem);font-weight:400;line-height:.94;letter-spacing:-.035em;color:var(--ink);max-width:980px;margin-bottom:1.4rem} h1 em{font-style:italic;color:var(--cyan)}
+    .hero-sub{font-size:clamp(1.02rem,1.4vw,1.24rem);color:var(--text);max-width:780px;line-height:1.78;margin-bottom:2rem}.hero-bullets{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem}.bullet{font-family:var(--mono);font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);background:rgba(92,197,240,.075);border:1px solid var(--line);border-radius:999px;padding:.45rem .85rem}.hero-actions{display:flex;flex-wrap:wrap;gap:.85rem}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border-radius:999px;font-weight:900;padding:.95rem 1.7rem;transition:.18s ease}.btn-primary{color:#021323;background:linear-gradient(135deg,#f7fbff,var(--cyan) 45%,var(--blue));box-shadow:0 0 36px rgba(45,156,219,.32)}.btn-primary:hover,.btn-secondary{color:var(--ink);background:rgba(255,255,255,.045);border:1px solid var(--line2)}.btn-secondary:hover{background:rgba(255,255,255,.075);border-color:var(--cyan)}
+    .hero-console{position:relative;background:linear-gradient(145deg,rgba(9,20,44,.96),rgba(7,14,31,.9));border:1px solid var(--line2);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:0 35px 100px rgba(0,0,0,.42),0 0 85px rgba(45,156,219,.1);overflow:hidden}.hero-console::before{content:'';position:absolute;inset:-2px;background:linear-gradient(130deg,rgba(92,197,240,.22),transparent 40%,rgba(124,58,237,.18));z-index:-1;border-radius:calc(var(--radius-lg) + 2px)}.hero-logo{padding:1rem 1rem 1.35rem;border-bottom:1px solid var(--line);margin-bottom:1.2rem}.console-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);font-weight:900;margin-bottom:.85rem}.console-title{font-family:var(--display);font-size:2rem;line-height:1;color:var(--ink);margin-bottom:.3rem}.console-text{font-size:.92rem;color:var(--muted);line-height:1.6}.console-stack{display:grid;gap:.72rem;margin-top:1.2rem}.console-row{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:.8rem;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.035);padding:.85rem}.console-num{display:grid;place-items:center;width:42px;height:42px;border-radius:999px;background:rgba(92,197,240,.11);border:1px solid var(--line2);font-family:var(--mono);font-weight:900;color:var(--cyan);font-size:.7rem}.console-row strong{display:block;color:var(--ink);font-size:.9rem}.console-row span{display:block;color:var(--muted);font-size:.78rem;line-height:1.4}.tag{font-family:var(--mono);font-size:.56rem;color:var(--green);letter-spacing:.08em;font-weight:900}
+    .section{padding:clamp(3.6rem,7vw,6.5rem) clamp(1rem,5vw,5rem);border-bottom:1px solid var(--line)}.inner{max-width:1180px;margin:0 auto}.section-head{max-width:780px;margin-bottom:2.6rem}.section-kicker{font-family:var(--mono);font-size:.66rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:.85rem}.section-title{font-family:var(--display);font-size:clamp(2rem,4vw,3.7rem);font-weight:400;line-height:1.04;color:var(--ink);margin-bottom:1rem}.section-title em{font-style:italic;color:var(--cyan)}.section-copy{font-size:1rem;color:var(--text);line-height:1.8;max-width:760px}
+    .value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}.value-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:1.5rem;min-height:150px}.value-card strong{display:block;color:var(--ink);font-size:1.02rem;margin-bottom:.55rem}.value-card p{color:var(--muted);font-size:.92rem;line-height:1.65}.check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1.3rem}.check{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:999px;padding:.72rem 1rem;font-weight:800;color:var(--text);font-size:.88rem}.check::before{content:'✓';color:var(--green);margin-right:.55rem;font-weight:900}
+    .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.product-card{position:relative;min-height:340px;border:1px solid var(--line);border-radius:var(--radius-lg);background:rgba(7,16,34,.88);padding:1.6rem;display:flex;flex-direction:column;overflow:hidden;transition:.18s ease}.product-card::before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,rgba(92,197,240,.085),transparent 55%);opacity:0;transition:.18s;pointer-events:none}.product-card:hover{border-color:var(--line2);transform:translateY(-4px);background:rgba(10,22,46,.96)}.product-card:hover::before{opacity:1}.product-index{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);font-weight:900;margin-bottom:1rem}.product-icon{font-size:2rem;margin-bottom:1rem}.product-card h3{font-family:var(--display);font-size:1.55rem;font-weight:400;line-height:1.12;color:var(--ink);margin-bottom:.8rem}.product-card p{font-size:.92rem;color:var(--muted);line-height:1.68}.product-footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:auto;padding-top:1.4rem}.status{font-family:var(--mono);font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;font-weight:900;border:1px solid var(--line);border-radius:999px;padding:.28rem .7rem;color:var(--muted)}.status.live{color:var(--green);background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.24)}.product-link{font-weight:900;color:var(--cyan)}
+    .pipeline{display:grid;gap:1px;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--line)}.step{display:grid;grid-template-columns:56px 1fr 90px;gap:1rem;align-items:center;padding:1.3rem 1.5rem;background:rgba(5,12,26,.88)}.step-num{display:grid;place-items:center;width:50px;height:50px;border-radius:999px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#03101f;font-family:var(--mono);font-weight:900}.step strong{display:block;color:var(--ink);font-size:1rem}.step span{display:block;color:var(--muted);font-size:.9rem;line-height:1.55}.step-tag{font-family:var(--mono);font-size:.62rem;font-weight:900;color:var(--cyan);letter-spacing:.11em;text-align:right}
+    .cta{padding:clamp(4rem,8vw,7rem) clamp(1rem,5vw,5rem);text-align:center}.cta-panel{max-width:980px;margin:0 auto;border:1px solid var(--line2);border-radius:34px;background:linear-gradient(145deg,rgba(12,25,52,.95),rgba(8,18,38,.82));padding:clamp(2rem,5vw,4rem);box-shadow:0 35px 100px rgba(0,0,0,.36)}.cta h2{font-family:var(--display);font-size:clamp(2.2rem,5vw,4.4rem);font-weight:400;line-height:1;color:var(--ink);margin-bottom:1rem}.cta p{max-width:680px;margin:0 auto 2rem;color:var(--text);font-size:1.05rem;line-height:1.8}
+    footer{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;padding:2rem clamp(1rem,5vw,5rem);border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}.footer-links{display:flex;gap:1rem;flex-wrap:wrap}.footer-links a{color:var(--cyan);font-weight:800}
+    @media(max-width:1020px){.hero{grid-template-columns:1fr}.product-grid{grid-template-columns:repeat(2,1fr)}.value-grid{grid-template-columns:1fr}.check-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:720px){.hero{padding-top:3rem}.hero-console{padding:1rem}.product-grid,.check-grid{grid-template-columns:1fr}.step{grid-template-columns:44px 1fr}.step-tag{grid-column:2;text-align:left}.console-row{grid-template-columns:36px 1fr}.console-row .tag{display:none}h1{font-size:clamp(2.5rem,16vw,4rem)}}
+  </style>
 </head>
 <body>
+<div class="page">
 
-<div class="bg-canvas">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Business Intake Engine</div>
+        <h1>Automate your <em>client intake.</em></h1>
+        <p class="hero-sub">From payroll calculation to client onboarding — capture every submission and deliver instant results automatically.</p>
+        <div class="hero-bullets" aria-label="FlowDesk Pro benefits"><span class="bullet">Structured form capture</span><span class="bullet">Instant processing</span><span class="bullet">Dashboard-ready records</span><span class="bullet">No manual data entry</span></div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/see-the-system-in-action.html">See It In Action →</a>
+          <a class="btn btn-secondary" href="demo-request.html">Request Demo</a>
+        </div>
+      </div>
+
+      <aside class="hero-console" aria-label="Smart Auto Attendant preview">
+        <div class="hero-logo"><img src="AI4-FLOWDESK-PRO-LOGO.png" alt="AI4 FlowDesk Pro logo" /></div>
+        <div class="console-label">BUSINESS INTAKE ENGINE</div>
+        <div class="console-title">Intake Engine</div>
+        <p class="console-text">Answers the call, captures the reason, and prepares a dashboard-ready record for follow-up.</p>
+        <div class="console-stack"><div class="console-row"><div class="console-num">01</div><div><strong>Submission received</strong><span>Client completes intake form or request.</span></div><div class="tag">INPUT</div></div><div class="console-row"><div class="console-num">02</div><div><strong>Data processed</strong><span>System structures and validates every field.</span></div><div class="tag">PROCESS</div></div><div class="console-row"><div class="console-num">03</div><div><strong>Record delivered</strong><span>Organized record ready for review and action.</span></div><div class="tag">RECORD</div></div></div></aside>
+    </section>
+
+    <section class="section" id="cloud-delivered">
+      <div class="inner">
+        <div class="section-head">
+          <div class="section-kicker">Cloud-delivered value</div>
+          <h2 class="section-title">No infrastructure overhaul required.</h2>
+          <p class="section-copy">FlowDesk Pro is accessed online. Your business does not need an on-premise installation, local server, PBX replacement, or new equipment purchase. There is no equipment for your team to patch or upgrade.</p>
+        </div>
+        <div class="value-grid">
+          <article class="value-card"><strong>Configured for your workflow</strong><p>FlowDesk Pro is designed around the customer-response path your business needs: calls, intake requests, lead review, follow-up, and status tracking.</p></article>
+          <article class="value-card"><strong>Secure web-based access</strong><p>Captured activity becomes organized records your team can review online, with demos and client access kept separate from protected backend systems.</p></article>
+        </div>
+        <div class="check-grid">
+          <div class="check">No local server</div>
+          <div class="check">No PBX replacement</div>
+          <div class="check">No equipment purchase</div>
+          <div class="check">No hardware maintenance</div>
+          <div class="check">Secure web-based access</div>
+          <div class="check">Configured business workflow</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="inner">
+        <div class="section-head">
+          <div class="section-kicker">Product suite</div>
+          <h2 class="section-title">Customer-response systems built for real business workflows.</h2>
+          <p class="section-copy">Explore FlowDesk Pro products for smart call answering, customer intake, lead management, business process capture, missed-call workflows, and appointment-ready request handling.</p>
+        </div>
+        <div class="product-grid">
+          <a class="product-card" href="smart-auto-attendant.html"><div><div class="product-index">01 / Flagship</div><div class="product-icon">☎️</div><h3>Smart Auto Attendant</h3><p>Answers inbound calls, greets callers by business name, captures caller details, routes requests, and creates dashboard-ready call records.</p></div><div class="product-footer"><span class="status live">Live demo</span><span class="product-link">See Details →</span></div></a>
+          <a class="product-card" href="lead-manager.html"><div><div class="product-index">02 / Dashboard</div><div class="product-icon">📊</div><h3>Lead Manager Dashboard</h3><p>Gives businesses a clear place to review captured calls, intake requests, urgency, status, and next actions.</p></div><div class="product-footer"><span class="status live">Preview</span><span class="product-link">See Details →</span></div></a>
+          <a class="product-card" href="intake-engine.html"><div><div class="product-index">03 / Intake</div><div class="product-icon">🧾</div><h3>Intake Engine</h3><p>Captures customer requests through structured web forms and turns them into organized records for follow-up.</p></div><div class="product-footer"><span class="status live">Demo</span><span class="product-link">See Details →</span></div></a>
+          <a class="product-card" href="business-process-intake.html"><div><div class="product-index">04 / Operations</div><div class="product-icon">⚙️</div><h3>Business Process Intake</h3><p>Collects structured business information, organizes submissions, and prepares review-ready workflow records.</p></div><div class="product-footer"><span class="status">Preview</span><span class="product-link">See Details →</span></div></a>
+          <a class="product-card" href="sms-text-back-workflow.html"><div><div class="product-index">05 / Follow-up</div><div class="product-icon">💬</div><h3>Missed-Call / SMS Text-Back Workflow</h3><p>Designed to support consent-aware missed-call follow-up workflows where SMS approval and customer consent requirements are met.</p></div><div class="product-footer"><span class="status">Pending approval</span><span class="product-link">See Details →</span></div></a>
+          <a class="product-card" href="appointment-request-workflow.html"><div><div class="product-index">06 / Appointments</div><div class="product-icon">📅</div><h3>Appointment Request Workflow</h3><p>Helps turn customer service requests into appointment-ready records with preferred time windows and follow-up details.</p></div><div class="product-footer"><span class="status">Preview</span><span class="product-link">See Details →</span></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="inner">
+        <div class="section-head">
+          <div class="section-kicker">Operating flow</div>
+          <h2 class="section-title">FlowDesk Pro connects customer activity to organized follow-up.</h2>
+          <p class="section-copy">Whether a customer calls, submits a form, requests an appointment, or needs follow-up, FlowDesk Pro is designed to capture the activity, structure the information, and prepare a record your business can act on.</p>
+        </div>
+        <div class="pipeline" aria-label="FlowDesk Pro workflow">
+          <div class="step"><div class="step-num">01</div><div><strong>Customer reaches out</strong><span>Phone calls, web forms, missed calls, or service requests create a customer-response opportunity.</span></div><div class="step-tag">INPUT</div></div>
+          <div class="step"><div class="step-num">02</div><div><strong>FlowDesk captures the details</strong><span>The system collects names, contact information, reason for contact, urgency, and supporting details.</span></div><div class="step-tag">CAPTURE</div></div>
+          <div class="step"><div class="step-num">03</div><div><strong>Record is organized</strong><span>Customer activity is turned into a structured record for review.</span></div><div class="step-tag">RECORD</div></div>
+          <div class="step"><div class="step-num">04</div><div><strong>Business is notified</strong><span>Email alerts can notify the business owner. SMS follow-up can be added where approved and consented.</span></div><div class="step-tag">ALERT</div></div>
+          <div class="step"><div class="step-num">05</div><div><strong>Follow-up becomes easier</strong><span>Every request has context, status, and a clear next action.</span></div><div class="step-tag">ACTION</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="demo">
+      <div class="cta-panel">
+        <div class="section-kicker">Personalized demo</div>
+        <h2>Ready to automate your client intake?</h2>
+        <p>See how the Business Intake Engine captures every submission and delivers structured records to your dashboard automatically.</p>
+        <a class="btn btn-primary" href="demo-request.html">See It In Action →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2026 FlowDesk Pro · Powered by Apropos Group LLC</div>
+    <div class="footer-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="demo-request.html">Request Demo</a></div>
+  </footer>
 </div>
-
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-brand">
-    <svg class="arc-svg" viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <path id="arc-ie" d="M 40,110 A 215,215 0 0,1 460,110"/>
-      </defs>
-      <text class="arc-text">
-        <textPath href="#arc-ie" startOffset="50%" text-anchor="middle">
-          BUSINESS INTAKE ENGINE DEMO
-        </textPath>
-      </text>
-    </svg>
-    <div class="logo-frame">
-      <img src="https://aiflowdeskpro.com/AI4-FLOWDESK-PRO-LOGO.png" alt="AI4 FlowDesk Pro">
-    </div>
-  </div>
-
-  <h1 class="hero-headline">
-    Your Intake.<br><span>Automated. Intelligent.</span>
-  </h1>
-  <p class="hero-sub">
-    From payroll calculation to client onboarding — our intake engine captures every detail and delivers instant results automatically.
-  </p>
-
-  <div class="hero-cta-wrap">
-    <a class="btn-primary" href="/see-the-system-in-action.html">
-      Launch the Intake Engine Demo <span class="arrow">→</span>
-    </a>
-  </div>
-
-  <div class="trust-row">
-    <div class="trust-item">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="7" r="6" stroke="#06B6D4" stroke-width="1.3"/>
-        <path d="M4.5 7L6.5 9L9.5 5.5" stroke="#06B6D4" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Instant Calculation
-    </div>
-    <div class="trust-item">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="7" r="6" stroke="#06B6D4" stroke-width="1.3"/>
-        <path d="M4.5 7L6.5 9L9.5 5.5" stroke="#06B6D4" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Auto Lead Capture
-    </div>
-    <div class="trust-item">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="7" r="6" stroke="#06B6D4" stroke-width="1.3"/>
-        <path d="M4.5 7L6.5 9L9.5 5.5" stroke="#06B6D4" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      No Technical Setup
-    </div>
-    <div class="trust-item">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="7" r="6" stroke="#06B6D4" stroke-width="1.3"/>
-        <path d="M4.5 7L6.5 9L9.5 5.5" stroke="#06B6D4" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Powered by Apropos Group
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 2 — FEATURES -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Product Value</div>
-      <h2 class="section-title">Intake that works the moment it's live.</h2>
-      <p class="section-sub">The Intake Engine handles payroll calculations, client onboarding, and lead capture — all in one automated system, ready from day one.</p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="4" y="2" width="16" height="20" rx="2"/>
-            <line x1="8" y1="8" x2="16" y2="8"/>
-            <line x1="8" y1="12" x2="16" y2="12"/>
-            <line x1="8" y1="16" x2="12" y2="16"/>
-            <path d="M14 15l2 2 4-4" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <h3>Instant Payroll Calculation</h3>
-        <p>Employees enter their hours and rate — the system calculates pay instantly with a full breakdown. No spreadsheets. No manual math.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-            <path d="M16 11l2 2 4-4" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <h3>Automated Lead Capture</h3>
-        <p>Every intake form submission becomes a lead automatically logged and ready for follow-up — no extra steps required from your team.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="3"/>
-            <path d="M8 12h8M12 8v8"/>
-            <circle cx="19" cy="5" r="3" fill="#06B6D4" stroke="none"/>
-          </svg>
-        </div>
-        <h3>Business Ready</h3>
-        <p>No technical setup required. Your intake system is live and capturing data from day one — built for real businesses, not IT departments.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 3 — DEMO FLOW -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">The Demo Experience</div>
-      <h2 class="section-title">What you're about to experience.</h2>
-      <p class="section-sub">Four steps to see the intake engine in action — from form submission to automatic lead logging and instant payroll results.</p>
-    </div>
-
-    <div class="flow-grid">
-      <div class="flow-step">
-        <div class="flow-num">01</div>
-        <h4>See the Intake Form in Action</h4>
-        <p>The live demo form shows exactly what your clients or employees will interact with from day one.</p>
-        <span class="flow-tag">Preview</span>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">02</div>
-        <h4>Enter Sample Payroll Information</h4>
-        <p>Input hours worked and hourly rate to see the payroll engine calculate and format results in real time.</p>
-        <span class="flow-tag">Calculate</span>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">03</div>
-        <h4>Receive Instant Calculation Results</h4>
-        <p>Gross pay, deductions, and net pay are returned instantly with a clean, structured breakdown.</p>
-        <span class="flow-tag">Results</span>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">04</div>
-        <h4>Watch the Lead Log Populate</h4>
-        <p>Every submission is automatically captured as a lead — logged and ready for follow-up without any manual entry.</p>
-        <span class="flow-tag">Auto-Log</span>
-      </div>
-    </div>
-
-    <div style="text-align:center; margin-top: 2.5rem;">
-      <a class="btn-primary" href="/see-the-system-in-action.html" style="display:inline-flex;">
-        Launch the Intake Engine Demo <span class="arrow">→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 4 — CROSS-DEMO -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Full Suite</div>
-      <h2 class="section-title">Explore All FlowDesk Pro Systems</h2>
-      <p class="section-sub">The Intake Engine connects seamlessly with the other FlowDesk Pro systems — giving you a fully automated front office from calls to forms.</p>
-    </div>
-
-    <div class="cross-grid">
-      <a class="cross-card" href="https://lead-management.aiflowdeskpro.com/landing.html">
-        <div class="cross-card-label">Product 02</div>
-        <h3>Lead Manager CRM</h3>
-        <p>Capture and manage every inbound lead. Real-time dashboard with AI-extracted caller details and instant alerts.</p>
-        <span class="cross-link">View Demo <span>→</span></span>
-      </a>
-      <a class="cross-card" href="https://auto-attendant.aiflowdeskpro.com/landing.html">
-        <div class="cross-card-label">Product 01</div>
-        <h3>Smart Auto-Attendant</h3>
-        <p>Route every caller to the right person, instantly. Intelligent call routing with a live call dashboard.</p>
-        <span class="cross-link">View Demo <span>→</span></span>
-      </a>
-      <a class="cross-card" href="https://aiflowdeskpro.com">
-        <div class="cross-card-label">Product 04</div>
-        <h3>AI Voice Attendant</h3>
-        <p>AI answers every call with your business name, captures caller intent, and creates structured records 24/7.</p>
-        <span class="cross-link">View Demo <span>→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">
-    <img src="https://aiflowdeskpro.com/AI4-FLOWDESK-PRO-LOGO.png" alt="AI4 FlowDesk Pro">
-    <div>
-      <div class="footer-meta">Powered by Apropos Group LLC</div>
-      <div class="footer-meta" style="margin-top:2px;">© 2026 FlowDesk Pro. All rights reserved.</div>
-    </div>
-  </div>
-  <div class="footer-links">
-    <a href="https://lead-management.aiflowdeskpro.com">Lead Manager</a>
-    <a href="https://auto-attendant.aiflowdeskpro.com">Auto-Attendant</a>
-    <a href="https://intake-engine.aiflowdeskpro.com">Intake Engine</a>
-    <a href="https://aiflowdeskpro.com">AI Voice</a>
-  </div>
-  <a class="footer-back" href="https://ai4businesses.org">← Return to AI4 Businesses</a>
-</footer>
-
 </body>
 </html>
