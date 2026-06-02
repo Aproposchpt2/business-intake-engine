@@ -38,7 +38,18 @@
     footer{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;padding:2rem clamp(1rem,5vw,5rem);border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}.footer-links{display:flex;gap:1rem;flex-wrap:wrap}.footer-links a{color:var(--cyan);font-weight:800}
     @media(max-width:1020px){.hero{grid-template-columns:1fr}.product-grid{grid-template-columns:repeat(2,1fr)}.value-grid{grid-template-columns:1fr}.check-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:720px){.hero{padding-top:3rem}.hero-console{padding:1rem}.product-grid,.check-grid{grid-template-columns:1fr}.step{grid-template-columns:44px 1fr}.step-tag{grid-column:2;text-align:left}.console-row{grid-template-columns:36px 1fr}.console-row .tag{display:none}h1{font-size:clamp(2.5rem,16vw,4rem)}}
-  </style>
+  
+/* -- FlowDesk Pro Brand Nav Override -- */
+.nav{background:#1B3A6B!important;border-bottom:1px solid rgba(27,58,107,0.3)!important;backdrop-filter:none!important;}
+.brand-mark,.brand-logo{width:40px!important;height:40px!important;background:#B8860B!important;border-radius:8px!important;border:none!important;box-shadow:none!important;display:grid!important;place-items:center!important;}
+.brand-mark::after{content:'FP';font-weight:700;font-size:1rem;color:#fff;font-family:Inter,system-ui,sans-serif;}
+.brand-mark img,.brand-logo img{display:none!important;}
+.brand-name,.brand-text strong,.nav-brand-name{color:#ffffff!important;}
+.brand-name span,.brand-text span,.nav-brand-sub{color:rgba(255,255,255,0.65)!important;}
+.nav-links a,.nav-link{color:rgba(255,255,255,0.8)!important;}
+.nav-links a:hover,.nav-link:hover{color:#B8860B!important;background:rgba(255,255,255,0.08)!important;}
+.nav-action,.nav-cta{background:#ffffff!important;color:#1B3A6B!important;border:none!important;box-shadow:none!important;font-family:Inter,system-ui,sans-serif!important;}
+.nav-action:hover,.nav-cta:hover{background:#B8860B!important;color:#ffffff!important;transform:translateY(-1px)!important;}</style>
 </head>
 <body>
 <div class="page">
